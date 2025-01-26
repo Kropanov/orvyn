@@ -1,6 +1,6 @@
 [project]
 name = "orvyn"
-version = "0.1.0"
+version = "0.2.0"
 description = "Add your description here"
 authors = [{ name = "Your Name", email = "your@email.com" }]
 readme = "README.md"
@@ -12,5 +12,6 @@ members = ["src/desktop_ui", "src/app"]
 
 [dependency-groups]
 dev = [
+    "black>=24.10.0",
     "pytest>=8.3.4",
 ]

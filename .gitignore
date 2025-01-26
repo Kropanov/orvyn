@@ -13,3 +13,6 @@ wheels/
 # IDE
 .vscode/
 .idea/
+
+# Pytest
+.pytest_cache

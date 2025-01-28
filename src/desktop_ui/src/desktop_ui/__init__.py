@@ -1,2 +1,1 @@
-def main1() -> None:
-    print("Hello from desktop-ui!")
+from .main import Application, main  # noqa: F401

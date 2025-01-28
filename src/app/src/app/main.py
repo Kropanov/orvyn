@@ -1,9 +1,8 @@
-import desktop_ui
+from desktop_ui import Application
 
 
 def main():
-    desktop_ui.main1()
-    print("app")
+    Application().run()
 
 
 if __name__ == "__main__":

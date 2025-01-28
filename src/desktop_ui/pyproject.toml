@@ -7,7 +7,9 @@ authors = [
     { name = "Maksim Kropanov", email = "kropanov@gmail.com" }
 ]
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "kivy>=2.3.1",
+]
 
 [project.scripts]
 desktop-ui = "desktop_ui:main"

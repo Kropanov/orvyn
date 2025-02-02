@@ -1,1 +1,1 @@
-from .main import Application, main  # noqa: F401
+from .app_window import AppWindow, main  # noqa: F401

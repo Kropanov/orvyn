@@ -10,7 +10,7 @@ class Sidebar(BoxLayout):
         self.width = 50
 
         with self.canvas.before:
-            Color(0, 0, 0, 1)
+            Color(0.20, 0.20, 0.20, 1)
             self.rect = Rectangle(pos=self.pos, size=self.size)
 
         self.bind(size=self._update_rect, pos=self._update_rect)

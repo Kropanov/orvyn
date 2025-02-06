@@ -1,8 +1,8 @@
 from kivy.graphics import Color, Rectangle
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.image import Image
 from kivy.uix.widget import Widget
 
+from desktop_ui.icon_button import IconButton
 from desktop_ui.utils import get_img_path
 
 
@@ -22,30 +22,23 @@ class Sidebar(BoxLayout):
 
         self.bind(size=self._update_rect, pos=self._update_rect)
 
-        file_path = get_img_path("ollama.png")
-        img = Image(source=file_path, size_hint_y=None, height=50)
-        self.add_widget(img)
+        self.images = [
+            "ollama.png",
+            "deepseek.png",
+            "openai.png",
+            "claude.png",
+            "gemini.png",
+        ]
 
-        file_path = get_img_path("deepseek.png")
-        img = Image(source=file_path, size_hint_y=None, height=50)
-        self.add_widget(img)
-
-        file_path = get_img_path("openai.png")
-        img = Image(source=file_path, size_hint_y=None, height=50)
-        self.add_widget(img)
-
-        file_path = get_img_path("claude.png")
-        img = Image(source=file_path, size_hint_y=None, height=50)
-        self.add_widget(img)
-
-        file_path = get_img_path("gemini.png")
-        img = Image(source=file_path, size_hint_y=None, height=50)
-        self.add_widget(img)
+        for image in self.images:
+            file_path = get_img_path(image)
+            img = IconButton(source=file_path, size_hint_y=None, height=50)
+            self.add_widget(img)
 
         self.add_widget(Widget())
 
         file_path = get_img_path("module.png")
-        img = Image(source=file_path, size_hint_y=None, height=50)
+        img = IconButton(source=file_path, size_hint_y=None, height=50)
         self.add_widget(img)
 
     def _update_rect(self, *args):

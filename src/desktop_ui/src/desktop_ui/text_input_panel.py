@@ -12,19 +12,17 @@ class TextInputPanel(BoxLayout):
         self.height = 50
         self.width = 650
 
-        text_input = TextInput(multiline=True)
-
+        text_input = TextInput(multiline=True, hint_text="Enter text here...")
         text_input.cursor_color = (1, 1, 1, 1)
         text_input.foreground_color = (1, 1, 1, 1)
         text_input.background_color = (0.21, 0.21, 0.21, 1)
-
         text_input.background_normal = ""
         text_input.background_active = ""
-        text_input.hint_text = "Enter text here..."
 
         self.add_widget(text_input)
+
         with self.canvas.before:
-            self.border_color = Color(0.21, 0.21, 0.21, 1)
+            Color(0.21, 0.21, 0.21, 1)
             self.border_line = Line(
                 points=[self.x, self.top, self.x + self.width, self.top], width=3
             )

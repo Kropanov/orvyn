@@ -1,22 +1,16 @@
-from kivy.graphics import Color, Rectangle
-from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.boxlayout import BoxLayout
+
+from desktop_ui.chat_body import ChatBody
+from desktop_ui.chat_header import ChatHeader
 
 
-class ChatLayout(AnchorLayout):
+class ChatLayout(BoxLayout):
     def __init__(self, **kwargs):
         super(ChatLayout, self).__init__(**kwargs)
-        self.anchor_x = "center"
-        self.anchor_y = "bottom"
+        self.orientation = "vertical"
 
-        self.size_hint_x = 1
-        self.size_hint_y = 1
+        chat_header = ChatHeader()
+        chat_body = ChatBody()
 
-        with self.canvas.before:
-            Color(0.31, 0.31, 0.31, 1)
-            self.rect = Rectangle(pos=self.pos, size=self.size)
-
-        self.bind(size=self._update_rect, pos=self._update_rect)
-
-    def _update_rect(self, *args):
-        self.rect.size = self.size
-        self.rect.pos = self.pos
+        self.add_widget(chat_header)
+        self.add_widget(chat_body)

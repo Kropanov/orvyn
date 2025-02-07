@@ -1,10 +1,10 @@
 from kivy.core.window import Window
+from kivy.graphics import Color, Rectangle
 from kivy.logger import Logger
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.image import Image
 
 
-# OPTIMIZE: instances and on_mouse_move
 class IconButton(ButtonBehavior, Image):
     instances = []
     _mouse_bound = False
@@ -12,6 +12,8 @@ class IconButton(ButtonBehavior, Image):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         IconButton.instances.append(self)
+        self.hovered = False
+        self.hover_box = None
 
         if not IconButton._mouse_bound:
             Window.bind(mouse_pos=IconButton.on_mouse_move)
@@ -21,7 +23,28 @@ class IconButton(ButtonBehavior, Image):
         Logger.info(f"IconButton: Pressed {self.source}")
 
     def on_release(self):
-        Logger.info(f"IconButton: Out {self.source}")
+        Logger.info(f"IconButton: Released {self.source}")
+
+    def show_hover_box(self):
+        if self.hover_box is None:
+            with self.canvas.after:
+                self.hover_color = Color(1, 1, 1, 0.3)
+                self.hover_box = Rectangle(pos=self.pos, size=self.size)
+            self.bind(pos=self.update_hover_box, size=self.update_hover_box)
+        self.hovered = True
+
+    def update_hover_box(self, *args):
+        if self.hover_box:
+            self.hover_box.pos = self.pos
+            self.hover_box.size = self.size
+
+    def hide_hover_box(self):
+        if self.hover_box:
+            self.canvas.after.remove(self.hover_color)
+            self.canvas.after.remove(self.hover_box)
+            self.hover_box = None
+            self.unbind(pos=self.update_hover_box, size=self.update_hover_box)
+        self.hovered = False
 
     @classmethod
     def on_mouse_move(cls, window, pos):
@@ -34,11 +57,12 @@ class IconButton(ButtonBehavior, Image):
             widget_pos = instance.to_widget(*pos)
             if instance.collide_point(*widget_pos):
                 hovered_any = True
-                break
+                if not instance.hovered:
+                    instance.show_hover_box()
+            else:
+                if instance.hovered:
+                    instance.hide_hover_box()
 
-        # current_cursor = (
-        #     window.system_cursor if hasattr(window, "system_cursor") else None
-        # )
         if hovered_any:
             Window.set_system_cursor("hand")
         else:

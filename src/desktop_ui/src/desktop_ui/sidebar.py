@@ -12,8 +12,8 @@ class Sidebar(BoxLayout):
 
         self.orientation = "vertical"
         self.size_hint_x = None
-        self.padding = (0, 6, 0, 0)
-        self.spacing = -5
+        self.padding = (0, 0, 0, 0)
+        self.spacing = 0
         self.width = 50
 
         with self.canvas.before:

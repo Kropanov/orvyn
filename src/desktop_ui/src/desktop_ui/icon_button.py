@@ -4,16 +4,20 @@ from kivy.logger import Logger
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.image import Image
 
+from desktop_ui.chat_header import ChatHeader
+
 
 class IconButton(ButtonBehavior, Image):
     instances = []
     _mouse_bound = False
+    chat_header = ChatHeader()
 
-    def __init__(self, **kwargs):
+    def __init__(self, module_name="", **kwargs):
         super().__init__(**kwargs)
         IconButton.instances.append(self)
         self.hovered = False
         self.hover_box = None
+        self.module_name = module_name
 
         if not IconButton._mouse_bound:
             Window.bind(mouse_pos=IconButton.on_mouse_move)
@@ -21,6 +25,7 @@ class IconButton(ButtonBehavior, Image):
 
     def on_press(self):
         Logger.info(f"IconButton: Pressed {self.source}")
+        self.chat_header.set_label_text(self.module_name)
 
     def on_release(self):
         Logger.info(f"IconButton: Released {self.source}")

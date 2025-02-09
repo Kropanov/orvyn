@@ -9,8 +9,11 @@ class ChatLayout(BoxLayout):
         super(ChatLayout, self).__init__(**kwargs)
         self.orientation = "vertical"
 
-        chat_header = ChatHeader()
-        chat_body = ChatBody()
+        self.chat_header = ChatHeader()
+        self.chat_body = ChatBody()
 
-        self.add_widget(chat_header)
-        self.add_widget(chat_body)
+        self.add_widget(self.chat_header)
+        self.add_widget(self.chat_body)
+
+    def update_header_text(self, new_text):
+        self.chat_header.label.text = new_text

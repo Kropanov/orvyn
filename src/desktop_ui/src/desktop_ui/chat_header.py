@@ -2,19 +2,11 @@ from kivy.graphics import Color, Rectangle
 from kivy.uix.label import Label
 from kivy.uix.stacklayout import StackLayout
 
-from desktop_ui.metaclasses.singleton import Singleton
 
-BaseMeta = type(StackLayout)
-
-
-class CombinedSingleton(Singleton, BaseMeta):
-    pass
-
-
-class ChatHeader(StackLayout, metaclass=CombinedSingleton):
+class ChatHeader(StackLayout):
     def __init__(
         self,
-        label_text="",
+        label_text="ollama",
         **kwargs,
     ):
         super(ChatHeader, self).__init__(**kwargs)

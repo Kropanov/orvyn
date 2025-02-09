@@ -12,15 +12,22 @@ class AppWindow(App):
     title = "Orvyn"
 
     def build(self):
-        main_layout = BoxLayout()
+        self.main_layout = BoxLayout()
 
-        sidebar = Sidebar()
-        chat_layout = ChatLayout()
+        self.sidebar = Sidebar(app=self)
+        self.chat_layout = ChatLayout()
+        self.current_module = self.chat_layout
 
-        main_layout.add_widget(sidebar)
-        main_layout.add_widget(chat_layout)
+        self.main_layout.add_widget(self.sidebar)
+        self.main_layout.add_widget(self.chat_layout)
 
-        return main_layout
+        return self.main_layout
+
+    def switch_module(self, module):
+        self.main_layout.clear_widgets()
+        self.main_layout.add_widget(self.sidebar)
+        self.main_layout.add_widget(module)
+        self.current_module = module
 
 
 def main():

@@ -1,0 +1,19 @@
+[project]
+name = "ollama-client"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Maksim Kropanov", email = "kropanov@gmail.com" }
+]
+requires-python = ">=3.10"
+dependencies = [
+    "ollama>=0.4.7",
+]
+
+[project.scripts]
+ollama-client = "ollama_client:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

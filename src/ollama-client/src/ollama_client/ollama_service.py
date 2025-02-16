@@ -10,10 +10,10 @@ class OllamaService:
         return ollama.list()
 
     def switch_model(self, model_name: str):
-        pass
+        self.current_model = model_name
 
-    def download_model(self, model_name: str):
-        pass
+    def __download_model(self, model_name: str):
+        return ollama.pull(model_name, stream=True)
 
     def chat(self, message: str):
         stream: ChatResponse = ollama.chat(
@@ -28,5 +28,6 @@ class OllamaService:
             stream=True,
         )
 
-        for chunk in stream:
-            print(chunk["message"]["content"], end="", flush=True)
+        return stream
+        # for chunk in stream:
+        # print(chunk["message"]["content"], end="", flush=True)
